@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-const tiles = ['a', 'c', 'a', 'b', 'a', 'b', 'c', 'c', 'b']
+const tiles = ['a', 'c', 'a', 'b', 'a', 'b', 'c', 'c', 'c', 'a', 'b', 'b']
 
 const makeGameTiles = () => {
   return tiles.map((tile) => {
