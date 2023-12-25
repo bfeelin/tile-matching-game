@@ -23,8 +23,9 @@ function App() {
     let alreadyFlipped = currentTiles.findIndex((tile) => tile.flipped && !tile.matched && !tile.error)
     let newTiles = [...currentTiles]
 
-    // Check for matched cards
+    // Check for already flipped card
     if(alreadyFlipped > -1 && alreadyFlipped !== index){
+      // Check for successful match
       if(newTiles[index].value === newTiles[alreadyFlipped].value){
         newTiles[index].matched = true
         newTiles[index].flipped = true
@@ -33,17 +34,9 @@ function App() {
       }
       else{
         // Display mismatched tiles, wait 1 second before hiding them
-        newTiles[index].error = true
-        newTiles[index].flipped = true
-        newTiles[alreadyFlipped].error = true
-        setCurrentTiles(newTiles)
+        setCurrentTiles(makeErrorTiles(true, index, alreadyFlipped))
         setTimeout(() => {
-          let newTiles = [...currentTiles]
-          newTiles[index].error = false
-          newTiles[index].flipped = false
-          newTiles[alreadyFlipped].error = false
-          newTiles[alreadyFlipped].flipped = false
-          setCurrentTiles(newTiles)
+          setCurrentTiles(makeErrorTiles(false, index, alreadyFlipped))
         }, 1000);
       }
     }
@@ -51,7 +44,15 @@ function App() {
       newTiles[index].flipped = !newTiles[index].flipped
       setCurrentTiles(newTiles)
     }
+  }
 
+  function makeErrorTiles(value:boolean, index1:number, index2:number){
+    let newTiles = [...currentTiles]
+    newTiles[index1].error = value
+    newTiles[index1].flipped = value
+    newTiles[index2].error = value
+    newTiles[index2].flipped = value
+    return newTiles
   }
 
   return (
