@@ -19,16 +19,33 @@ function App() {
   const [currentTiles, setCurrentTiles] = useState(makeGameTiles())
 
   const handleFlipTile = (index:number) => {
+    let alreadyFlipped = currentTiles.findIndex((tile) => tile.flipped && !tile.matched)
     let newTiles = [...currentTiles]
-    newTiles[index].flipped = !newTiles[index].flipped
-    setCurrentTiles(newTiles)
+
+    // Check for matched cards
+    if(alreadyFlipped > -1 && alreadyFlipped !== index){
+      if(newTiles[index].value === newTiles[alreadyFlipped].value){
+        newTiles[index].matched = true
+        newTiles[index].flipped = true
+        newTiles[alreadyFlipped].matched = true
+        setCurrentTiles(newTiles)
+      }
+      else{
+
+      }
+    }
+    else{
+      newTiles[index].flipped = !newTiles[index].flipped
+      setCurrentTiles(newTiles)
+    }
+
   }
 
   return (
       <div className='tile-grid'>
       {currentTiles?.map((tile, i) => (
         <div 
-          className='tile'
+          className={`tile ${tile.matched && 'tile-matched'}`}
           key={i} 
           onClick={() => handleFlipTile(i)}>
           {tile.flipped ? tile.value : ''}
