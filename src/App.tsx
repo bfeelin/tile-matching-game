@@ -62,7 +62,7 @@ function App() {
         <div 
           className={`tile ${tile.matched && 'tile-matched'} ${tile.error && 'tile-error'}`}
           key={i} 
-          onClick={() => handleFlipTile(i)}>
+          onClick={() => !tile.error && !tile.matched && handleFlipTile(i)}>
           {tile.flipped ? tile.value : ''}
         </div>
       ))}
