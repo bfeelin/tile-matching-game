@@ -20,7 +20,6 @@ function App() {
   const [currentTiles, setCurrentTiles] = useState(makeGameTiles())
 
   const handleFlipTile = (index:number) => {
-
     let alreadyFlipped = currentTiles.findIndex((tile) => tile.flipped && !tile.matched && !tile.error)
     let newTiles = [...currentTiles]
 
@@ -57,7 +56,7 @@ function App() {
 
   return (
       <>
-      <button>Reset</button>
+      <button onClick={() => setCurrentTiles(makeGameTiles())}>Reset</button>
       <div className='tile-grid'>
       {currentTiles?.map((tile, i) => (
         <div 
