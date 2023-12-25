@@ -84,3 +84,7 @@ button:focus-visible {
   align-content: center;
   justify-content: center;
 }
+
+.tile-matched{
+  border-color: green;
+}
