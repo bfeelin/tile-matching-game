@@ -88,3 +88,7 @@ button:focus-visible {
 .tile-matched{
   border-color: green;
 }
+
+.tile-error{
+  border-color: red;
+}
